@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=ai.mimic3.Speech.Provider
+Exec=@bindir@/speech-provider-mimic3

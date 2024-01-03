@@ -1,0 +1,5 @@
+pyproject-metadata
+packaging
+mycroft-mimic3-tts[all]
+langcodes
+language_data

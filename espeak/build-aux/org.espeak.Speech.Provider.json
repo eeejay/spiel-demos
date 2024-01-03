@@ -1,0 +1,68 @@
+{
+  "app-id": "org.espeak.Speech.Provider",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "23.08",
+  "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable",
+    "org.freedesktop.Sdk.Extension.llvm17"
+  ],
+  "command": "speech-provider-espeak",
+  "finish-args": [
+    "--share=network",
+    "--socket=pulseaudio"
+  ],
+  "build-options": {
+    "prepend-path": "/usr/lib/sdk/llvm17/bin:/usr/lib/sdk/rust-stable/bin:/app/sdk/bin",
+    "prepend-ld-library-path": "/usr/lib/sdk/llvm17/lib:/app/lib",
+    "env": {
+      "RUSTFLAGS": "--remap-path-prefix =../ -L/app/lib",
+      "CARGO_HOME": "/run/build/speech-provider-espeak/cargo"
+    }
+  },
+  "modules": [
+    {
+      "name": "espeak-ng",
+      "cleanup": [
+        "*.la"
+      ],
+      "no-parallel-make": true,
+      "build-options": {
+        "ldflags": "-Wl,--allow-multiple-definition"
+      },
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/espeak-ng/espeak-ng.git",
+          "tag": "1.51.1",
+          "commit": "34762a2b9621d3643e67a00642984c21f0626bdc",
+          "x-checker-data": {
+            "type": "git",
+            "tag-pattern": "^([\\d.]+)$"
+          }
+        }
+      ],
+      "post-install": [
+        "ln -s /app/lib/libespeak-ng.so /app/lib/libespeak.so",
+        "ln -s /app/lib/libespeak-ng.a /app/lib/libespeak.a"
+      ]
+    },
+    {
+      "name": "speech-provider-espeak",
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Doffline=true"
+      ],
+      "build-options": {
+        "ldflags": "--verbose"
+      },
+      "sources": [
+        {
+          "type": "dir",
+          "path": "../"
+        },
+        "cargo-sources.json"
+      ]
+    }
+  ]
+}

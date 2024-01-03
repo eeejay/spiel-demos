@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=org.espeak.Speech.Provider
+Exec=@bindir@/speech-provider-espeak
