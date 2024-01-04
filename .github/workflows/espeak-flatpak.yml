@@ -29,10 +29,10 @@ jobs:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Install llvm17 extension
-        run: flatpak install org.freedesktop.Sdk.Extension.llvm17
+        run: flatpak install -y org.freedesktop.Sdk.Extension.llvm17
 
       - name: Install rust extension
-        run: flatpak install org.freedesktop.Sdk.Extension.rust-stable
+        run: flatpak install -y org.freedesktop.Sdk.Extension.rust-stable
 
       - name: Build
         id: build
