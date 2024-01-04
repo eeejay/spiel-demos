@@ -1,0 +1,60 @@
+name: Build Flatpak Repository
+
+on: workflow_dispatch
+
+jobs:
+  flatpak:
+    name: Flatpak
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/andyholmes/flatter/gnome:45
+      options: --privileged
+    permissions:
+      contents: write
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        manifest:
+          - spiel-it/org.monotonous.spiel-it.json
+          - providers/espeak/build-aux/org.espeak.Speech.Provider.json
+          - providers/mimic3/build-aux/ai.mimic3.Speech.Provider.json
+      fail-fast: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup GPG
+        id: gpg
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+      - name: Install org.freedesktop.Platform
+        run: flatpak install --noninteractive flathub org.freedesktop.Platform//23.08
+
+      - name: Install org.freedesktop.Sdk
+        run: flatpak install --noninteractive flathub org.freedesktop.Sdk//23.08
+
+      - name: Install org.freedesktop.Sdk.Extension.llvm17
+        run: flatpak install --noninteractive flathub org.freedesktop.Sdk.Extension.llvm17//23.08
+  
+      - name: Install org.freedesktop.Sdk.Extension.rust-stable
+        run: flatpak install --noninteractive flathub org.freedesktop.Sdk.Extension.rust-stable//23.08
+  
+      - name: Build
+        id: build
+        uses: andyholmes/flatter@main
+        with:
+          files: ${{ matrix.manifest }}
+          arch: x86_64
+          gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
+          upload-bundles: true
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          folder: ${{ steps.build.outputs.repository }}
+          target-folder: repo
+          single-commit: true
