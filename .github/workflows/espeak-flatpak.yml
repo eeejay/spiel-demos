@@ -1,4 +1,4 @@
-name: Mimic3 Speech Provider Flatpak
+name: eSpeak Speech Provider Flatpak
 
 on: workflow_dispatch
 
@@ -33,7 +33,7 @@ jobs:
         uses: andyholmes/flatter@main
         with:
           files: |
-            providers/mimic3/build-aux/ai.mimic3.Speech.Provider.json
+            providers/espeak/build-aux/org.espeak.Speech.Provider.json
           arch: ${{ matrix.arch }}
           gpg-sign: ${{ steps.gpg.outputs.fingerprint }}
           upload-bundles: true
