@@ -7,7 +7,7 @@ jobs:
     name: Flatpak
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/andyholmes/flatter/gnome:45
+      image: ghcr.io/andyholmes/flatter/freedesktop:23.08
       options: --privileged
     permissions:
       contents: write
