@@ -32,7 +32,7 @@ jobs:
         run: flatpak install --noninteractive org.freedesktop.Sdk.Extension.llvm17
 
       - name: Install rust extension
-        run: flatpak install --noninteractive flathub org.freedesktop.Sdk.Extension.rust-stable
+        run: flatpak install --noninteractive flathub org.freedesktop.Sdk.Extension.rust-stable//23.08
 
       - name: Build
         id: build
