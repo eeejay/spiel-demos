@@ -2,3 +2,6 @@ __pycache__
 .venv
 .flatpak-builder
 target
+*.onnx
+*.onnx.json
+demo-repo

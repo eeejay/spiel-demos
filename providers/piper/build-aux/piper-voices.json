@@ -1,0 +1,30 @@
+{
+  "name": "piper-voices",
+  "buildsystem": "simple",
+  "build-commands": [
+    "install -d /app/share/piper/voices",
+    "install -Dm644 *.onnx *.onnx.json /app/share/piper/voices"
+  ],
+  "sources": [
+    {
+      "type": "file",
+      "url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx?download=true",
+      "sha256": "5efe09e69902187827af646e1a6e9d269dee769f9877d17b16b1b46eeaaf019f"
+    },
+    {
+      "type": "file",
+      "url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx.json?download=true",
+      "sha256": "efe19c417bed055f2d69908248c6ba650fa135bc868b0e6abb3da181dab690a0"
+    },
+    {
+      "type": "file",
+      "url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/ramona/low/de_DE-ramona-low.onnx?download=true",
+      "sha256": "a1068592532aad8c49bf3d1a01b8749c11d7dba726689ee28ad64e7b627ae4c5"
+    },
+    {
+      "type": "file",
+      "url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/ramona/low/de_DE-ramona-low.onnx.json?download=true",
+      "sha256": "64906ab7a050ac685fa3dcea044baa798f67ed77be164f9c668a69298c6487d2"
+    }
+  ]
+}
