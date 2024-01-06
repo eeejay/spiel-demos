@@ -10,5 +10,5 @@ Download and install this demo app
 
 For the demo app to work you need to install one or more speech provider services:
 
-* [Mimic3](https://eeejay.github.io/spiel-demos/mimic3.flatpakref)
+* [Piper](https://eeejay.github.io/spiel-demos/piper.flatpakref)
 * [eSpeak](https://eeejay.github.io/spiel-demos/espeak.flatpakref)
