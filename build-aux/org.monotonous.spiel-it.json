@@ -16,8 +16,7 @@
       "buildsystem": "meson",
       "config-opts": [
         "-Dtests=false",
-        "-Ddocs=false",
-        "-Dspiel-it=true"
+        "-Ddocs=false"
       ],
       "sources": [
         {
