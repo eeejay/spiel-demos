@@ -19,7 +19,7 @@ pkgdatadir = datadir / meson.project_name()
 application_id = 'org.espeak.Speech.Provider'
 
 find_program('cargo', required: false)
-cargo_script = find_program('build-aux/cargo.py')
+cargo_script = find_program('cargo.py')
 
 subdir('src')
 

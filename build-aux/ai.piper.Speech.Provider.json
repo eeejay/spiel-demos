@@ -109,7 +109,7 @@
       "sources": [
         {
           "type": "dir",
-          "path": "../"
+          "path": "../providers/piper"
         }
       ]
     }

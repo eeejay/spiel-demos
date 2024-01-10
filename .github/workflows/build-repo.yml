@@ -16,9 +16,9 @@ jobs:
       max-parallel: 1
       matrix:
         manifest:
-          - spiel-it/org.monotonous.spiel-it.json
-          - providers/espeak/build-aux/org.espeak.Speech.Provider.json
-          - providers/piper/build-aux/ai.piper.Speech.Provider.json
+          - build-aux/org.monotonous.spiel-it.json
+          - build-aux/org.espeak.Speech.Provider.json
+          - build-aux/ai.piper.Speech.Provider.json
       fail-fast: true
 
     steps:

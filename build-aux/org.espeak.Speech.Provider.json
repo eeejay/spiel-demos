@@ -9,7 +9,6 @@
   ],
   "command": "speech-provider-espeak",
   "finish-args": [
-    "--share=network",
     "--socket=pulseaudio"
   ],
   "build-options": {
@@ -59,9 +58,9 @@
       "sources": [
         {
           "type": "dir",
-          "path": "../"
+          "path": "../providers/espeak"
         },
-        "cargo-sources.json"
+        "espeak-cargo-sources.json"
       ]
     }
   ]

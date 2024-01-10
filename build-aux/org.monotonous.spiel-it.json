@@ -23,7 +23,17 @@
         {
           "type": "git",
           "url": "https://github.com/eeejay/libspiel.git",
-          "commit": "c7ba3bd9f59e1b784d8912d3465ea6808c613c91"
+          "branch": "main"
+        }
+      ]
+    },
+    {
+      "name": "spiel-it",
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "dir",
+          "path": "../spiel-it"
         }
       ]
     }
