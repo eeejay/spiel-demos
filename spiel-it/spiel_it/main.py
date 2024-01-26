@@ -1,6 +1,7 @@
 import gi
 from gi.repository import GLib
 import pathlib
+from time import time
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Spiel", "0.1")
@@ -31,6 +32,7 @@ class SpielItApp(Adw.Application):
         self.ui_file = str(pathlib.Path(ui_file_path) / 'spiel-it.ui')
         super().__init__(**kwargs)
         self.connect("activate", self.on_activate)
+        self._press_speak_time = 0
 
     def on_activate(self, app):
         # Need to preload type before loading ui file
@@ -123,12 +125,14 @@ class SpielItApp(Adw.Application):
         utterance.props.rate = self.rate.get_value()
         utterance.props.pitch = self.pitch.get_value()
         utterance.props.voice = self.voices_select.get_selected_item()
+        self._press_speak_time = time()
         self.speaker.speak(utterance)
 
     def _on_speaker_update(self, speaker, param):
         if param.name == "speaking":
             self.text_view.set_editable(not speaker.props.speaking)
             if speaker.props.speaking:
+                print("Speak time: ", time() - self._press_speak_time)
                 self.playpause_button.set_child(Gtk.Spinner(spinning=True))
             else:
                 self.playpause_button.set_icon_name("media-playback-start")
