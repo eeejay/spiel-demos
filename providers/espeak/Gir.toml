@@ -1,0 +1,22 @@
+# Using https://github.com/gtk-rs/gir/tree/33cf4d29
+
+[options]
+library = "SpielProvider"
+version = "0.1"
+min_cfg_version = "0.1"
+target_path = "."
+girs_directories = [
+    "/usr/share/gir-1.0/",
+    "../../../spiel/build/libspielprovider",
+]
+work_mode = "normal"
+single_version_file = true
+generate_safety_asserts = true
+deprecate_by_min_version = true
+
+generate = [
+  "SpielProvider.StreamWriter",
+  "SpielProvider.EventType"
+]
+
+manual = []

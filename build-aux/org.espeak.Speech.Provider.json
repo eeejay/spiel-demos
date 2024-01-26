@@ -47,6 +47,22 @@
       ]
     },
     {
+      "name": "libspielprovider",
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Dtests=false",
+        "-Ddocs=false",
+        "-Dlibspiel=false"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/eeejay/spiel.git",
+          "branch": "direct-audio"
+        }
+      ]
+    },
+    {
       "name": "speech-provider-espeak",
       "buildsystem": "meson",
       "config-opts": [
