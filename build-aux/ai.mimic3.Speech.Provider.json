@@ -5,8 +5,7 @@
   "sdk": "org.gnome.Sdk",
   "command": "speech-provider-mimic3",
   "finish-args": [
-    "--share=network",
-    "--socket=pulseaudio"
+    "--share=network"
   ],
   "modules": [
     {

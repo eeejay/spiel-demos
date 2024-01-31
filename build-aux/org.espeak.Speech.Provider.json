@@ -8,9 +8,6 @@
     "org.freedesktop.Sdk.Extension.llvm17"
   ],
   "command": "speech-provider-espeak",
-  "finish-args": [
-    "--socket=pulseaudio"
-  ],
   "build-options": {
     "prepend-path": "/usr/lib/sdk/llvm17/bin:/usr/lib/sdk/rust-stable/bin:/app/sdk/bin",
     "prepend-ld-library-path": "/usr/lib/sdk/llvm17/lib:/app/lib",

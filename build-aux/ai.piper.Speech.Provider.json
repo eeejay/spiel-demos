@@ -4,9 +4,6 @@
   "runtime-version": "45",
   "sdk": "org.gnome.Sdk",
   "command": "speech-provider-piper",
-  "finish-args": [
-    "--socket=pulseaudio"
-  ],
   "modules": [
     {
       "name": "python3-piper-tts",
