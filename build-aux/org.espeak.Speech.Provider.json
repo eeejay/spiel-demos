@@ -58,7 +58,7 @@
         {
           "type": "git",
           "url": "https://github.com/eeejay/spiel.git",
-          "branch": "direct-audio"
+          "branch": "main"
         }
       ]
     },
