@@ -32,6 +32,29 @@ pub const SPIEL_PROVIDER_EVENT_TYPE_MARK: SpielProviderEventType = 4;
 // Constants
 pub const SPIEL_PROVIDER_STREAM_PROTOCOL_VERSION: &[u8] = b"0.01\0";
 
+// Flags
+pub type SpielProviderVoiceFeature = c_uint;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_NONE: SpielProviderVoiceFeature = 0;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_WORD: SpielProviderVoiceFeature = 1;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_SENTENCE: SpielProviderVoiceFeature = 2;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_RANGE: SpielProviderVoiceFeature = 4;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_SSML_MARK: SpielProviderVoiceFeature = 8;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_DATE: SpielProviderVoiceFeature = 16;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_TIME: SpielProviderVoiceFeature = 32;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_TELEPHONE: SpielProviderVoiceFeature = 64;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CHARACTERS: SpielProviderVoiceFeature = 128;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CHARACTERS_GLYPHS: SpielProviderVoiceFeature = 256;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CARDINAL: SpielProviderVoiceFeature = 512;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_ORDINAL: SpielProviderVoiceFeature = 1024;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CURRENCY: SpielProviderVoiceFeature = 2048;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_BREAK: SpielProviderVoiceFeature = 4096;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SUB: SpielProviderVoiceFeature = 8192;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_PHONEME: SpielProviderVoiceFeature = 16384;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_EMPHASIS: SpielProviderVoiceFeature = 32768;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_PROSODY: SpielProviderVoiceFeature = 65536;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_SENTENCE_PARAGRAPH: SpielProviderVoiceFeature = 131072;
+pub const SPIEL_PROVIDER_VOICE_FEATURE_SSML_TOKEN: SpielProviderVoiceFeature = 262144;
+
 // Records
 #[derive(Copy, Clone)]
 #[repr(C)]
@@ -124,6 +147,11 @@ impl ::std::fmt::Debug for SpielProviderStreamWriter {
 
 #[link(name = "spiel-provider-0.1")]
 extern "C" {
+
+    //=========================================================================
+    // SpielProviderVoiceFeature
+    //=========================================================================
+    pub fn spiel_provider_voice_feature_get_type() -> GType;
 
     //=========================================================================
     // SpielProviderStreamReader

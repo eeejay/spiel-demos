@@ -16,7 +16,8 @@ deprecate_by_min_version = true
 
 generate = [
   "SpielProvider.StreamWriter",
-  "SpielProvider.EventType"
+  "SpielProvider.EventType",
+  "SpielProvider.VoiceFeature"
 ]
 
 manual = []

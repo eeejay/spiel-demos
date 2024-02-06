@@ -14,5 +14,6 @@ int main() {
     printf("%s;%zu;%zu\n", "SpielProviderStreamHeader", sizeof(SpielProviderStreamHeader), alignof(SpielProviderStreamHeader));
     printf("%s;%zu;%zu\n", "SpielProviderStreamReaderClass", sizeof(SpielProviderStreamReaderClass), alignof(SpielProviderStreamReaderClass));
     printf("%s;%zu;%zu\n", "SpielProviderStreamWriterClass", sizeof(SpielProviderStreamWriterClass), alignof(SpielProviderStreamWriterClass));
+    printf("%s;%zu;%zu\n", "SpielProviderVoiceFeature", sizeof(SpielProviderVoiceFeature), alignof(SpielProviderVoiceFeature));
     return 0;
 }

@@ -9,3 +9,6 @@ pub use self::stream_writer::StreamWriter;
 mod enums;
 pub use self::enums::EventType;
 
+mod flags;
+pub use self::flags::VoiceFeature;
+

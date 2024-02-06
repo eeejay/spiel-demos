@@ -213,6 +213,7 @@ const RUST_LAYOUTS: &[(&str, Layout)] = &[
     ("SpielProviderStreamHeader", Layout {size: size_of::<SpielProviderStreamHeader>(), alignment: align_of::<SpielProviderStreamHeader>()}),
     ("SpielProviderStreamReaderClass", Layout {size: size_of::<SpielProviderStreamReaderClass>(), alignment: align_of::<SpielProviderStreamReaderClass>()}),
     ("SpielProviderStreamWriterClass", Layout {size: size_of::<SpielProviderStreamWriterClass>(), alignment: align_of::<SpielProviderStreamWriterClass>()}),
+    ("SpielProviderVoiceFeature", Layout {size: size_of::<SpielProviderVoiceFeature>(), alignment: align_of::<SpielProviderVoiceFeature>()}),
 ];
 
 const RUST_CONSTANTS: &[(&str, &str)] = &[
@@ -225,6 +226,26 @@ const RUST_CONSTANTS: &[(&str, &str)] = &[
     ("(gint) SPIEL_PROVIDER_EVENT_TYPE_SENTENCE", "2"),
     ("(gint) SPIEL_PROVIDER_EVENT_TYPE_WORD", "1"),
     ("SPIEL_PROVIDER_STREAM_PROTOCOL_VERSION", "0.01"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_RANGE", "4"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_SENTENCE", "2"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_SSML_MARK", "8"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_EVENTS_WORD", "1"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_NONE", "0"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_BREAK", "4096"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_EMPHASIS", "32768"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_PHONEME", "16384"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_PROSODY", "65536"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CARDINAL", "512"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CHARACTERS", "128"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CHARACTERS_GLYPHS", "256"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_CURRENCY", "2048"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_DATE", "16"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_ORDINAL", "1024"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_TELEPHONE", "64"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SAY_AS_TIME", "32"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SENTENCE_PARAGRAPH", "131072"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_SUB", "8192"),
+    ("(guint) SPIEL_PROVIDER_VOICE_FEATURE_SSML_TOKEN", "262144"),
 ];
 
 
