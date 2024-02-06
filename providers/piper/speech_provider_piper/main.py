@@ -166,17 +166,17 @@ class PiperProvider(dbus.service.Object):
 
     @dbus.service.method(
         "org.freedesktop.Speech.Provider",
-        in_signature="hssdd",
+        in_signature="hssddb",
         out_signature="",
     )
-    def Synthesize(self, fd, utterance, voice_id, pitch, rate):
+    def Synthesize(self, fd, utterance, voice_id, pitch, rate, is_ssml):
         worker = self._worker_pool.pop(0)
         worker.synthesize(fd.take(), utterance, voice_id, pitch, rate)
 
     @dbus.service.method(
         "org.freedesktop.Speech.Provider",
         in_signature="",
-        out_signature="a(sssas)",
+        out_signature="a(ssstas)",
     )
     def GetVoices(self):
         voices = []
@@ -192,6 +192,7 @@ class PiperProvider(dbus.service.Object):
                     f"{dataset} ({name_native})",
                     identifier,
                     f"audio/x-raw,format=S16LE,channels=1,rate={sample_rate}",
+                    0,
                     languages,
                 )
             )

@@ -109,7 +109,7 @@ class Mimic3SynthWorker(GObject.Object):
                 ww.write(result.audio_bytes)
         ww.close()
 
-    def synthesize(self, fd, text, voice_id=None, pitch=None, rate=None):
+    def synthesize(self, fd, text, voice_id=None, pitch=None, rate=None,):
         self.sink.set_property("fd", fd)
         self.source = Gst.ElementFactory.make("fdsrc", "source")
         self.pipeline.add(self.source)
@@ -152,17 +152,17 @@ class MimicProvider(dbus.service.Object):
 
     @dbus.service.method(
         "org.freedesktop.Speech.Provider",
-        in_signature="hssdd",
+        in_signature="hssddb",
         out_signature="",
     )
-    def Synthesize(self, fd, utterance, voice_id, pitch, rate):
+    def Synthesize(self, fd, utterance, voice_id, pitch, rate, is_ssml):
         worker = self._worker_pool.pop(0)
         worker.synthesize(fd.take(), utterance, voice_id, pitch, rate)
 
     @dbus.service.method(
         "org.freedesktop.Speech.Provider",
         in_signature="",
-        out_signature="a(sssas)",
+        out_signature="a(ssstas)",
     )
     def GetVoices(self):
         voices = []
@@ -177,6 +177,7 @@ class MimicProvider(dbus.service.Object):
                             f"{v.name} - {lang_desc}",
                             v.key,
                             f"audio/x-raw,format=S16LE,channels=1,rate={SAMPLE_RATE}",
+                            0,
                             [lang_tag],
                         )
                     )
@@ -187,6 +188,7 @@ class MimicProvider(dbus.service.Object):
                                 f"{v.name}/{speaker} - {lang_desc}",
                                 f"{v.key}#{speaker}",
                                 f"audio/x-raw,format=S16LE,channels=1,rate={SAMPLE_RATE}",
+                                0,
                                 [v.language],
                             )
                         )

@@ -36,7 +36,8 @@ impl Speaker {
 
 #[dbus_interface(name = "org.freedesktop.Speech.Provider")]
 impl Speaker {
-    async fn get_voices(&self) -> Vec<(String, String, String, Vec<String>)> {
+    async fn get_voices(&self) -> Vec<(String, String, String, u64, Vec<String>)> {
+        let features = VoiceFeature::EVENTS_WORD | VoiceFeature::EVENTS_SENTENCE;
         espeaker::list_voices()
             .into_iter()
             .map(|v| {
@@ -44,6 +45,7 @@ impl Speaker {
                     v.name,
                     v.identifier,
                     "audio/x-spiel,format=S16LE,channels=1,rate=22050".to_string(),
+                    features.bits() as u64,
                     v.languages.into_iter().map(|l| l.name).collect(),
                 )
             })
@@ -57,6 +59,7 @@ impl Speaker {
         voice_id: &str,
         pitch: f32,
         rate: f32,
+        is_ssml: bool,
         #[zbus(header)] _header: MessageHeader<'_>,
         #[zbus(signal_context)] _ctxt: SignalContext<'_>,
     ) {
