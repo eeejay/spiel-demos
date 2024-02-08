@@ -8,6 +8,7 @@
     "--share=network"
   ],
   "modules": [
+    "python3-dasbus.json",
     {
       "name": "python3-mycroft-mimic3-tts",
       "buildsystem": "simple",

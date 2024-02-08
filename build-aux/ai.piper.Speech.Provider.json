@@ -5,6 +5,7 @@
   "sdk": "org.gnome.Sdk",
   "command": "speech-provider-piper",
   "modules": [
+    "python3-dasbus.json",
     {
       "name": "python3-piper-tts",
       "buildsystem": "simple",
