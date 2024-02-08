@@ -10,7 +10,7 @@ project('speech-provider-mimic3',
 # Dependencies
 python_module = import('python')
 py = python_module.find_installation('python3', required: true, modules: [
-  'gi', 'mimic3_tts'
+  'gi', 'mimic3_tts', 'dasbus'
 ])
 
 # Configuration used in template files

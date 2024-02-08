@@ -6,11 +6,12 @@ gi.require_version("Gst", "1.0")
 from gi.repository import Gst, GObject, GLib
 import mimic3_tts
 import langcodes
-import dbus
+from dasbus.connection import SessionMessageBus
+from dasbus.unix import GLibServerUnix
+from dasbus.server.interface import dbus_interface
+from dasbus.typing import Variant, UnixFD, Str, Double, Bool, List, Tuple, UInt64
 import os
 import threading
-import dbus.service
-import dbus.mainloop.glib
 
 SAMPLE_RATE = 22050
 AUTO_EXIT_SECONDS = 120  # Two minute timeout for service
@@ -125,8 +126,9 @@ class Mimic3SynthWorker(GObject.Object):
         self.pipeline.set_state(Gst.State.PLAYING)
 
 
-class MimicProvider(dbus.service.Object):
-    def __init__(self, loop, *args):
+@dbus_interface("org.freedesktop.Speech.Provider")
+class MimicProvider(object):
+    def __init__(self, loop):
         self._last_speak_args = [0, "", "", 0, 0, 0]
         self._loop = loop
         if not os.environ.get("KEEP_ALIVE"):
@@ -139,7 +141,6 @@ class MimicProvider(dbus.service.Object):
             worker = Mimic3SynthWorker(self.mimic3)
             worker.connect("done", self._on_done)
             self._worker_pool.append(worker)
-        dbus.service.Object.__init__(self, *args)
 
     def _timeout(self):
         if len(self._worker_pool) < 5:
@@ -150,21 +151,20 @@ class MimicProvider(dbus.service.Object):
     def _on_done(self, worker):
         self._worker_pool.append(worker)
 
-    @dbus.service.method(
-        "org.freedesktop.Speech.Provider",
-        in_signature="hssddb",
-        out_signature="",
-    )
-    def Synthesize(self, fd, utterance, voice_id, pitch, rate, is_ssml):
+    def Synthesize(
+        self,
+        fd: UnixFD,
+        utterance: Str,
+        voice_id: Str,
+        pitch: Double,
+        rate: Double,
+        is_ssml: Bool,
+    ):
         worker = self._worker_pool.pop(0)
-        worker.synthesize(fd.take(), utterance, voice_id, pitch, rate)
+        worker.synthesize(fd, utterance, voice_id, pitch, rate)
 
-    @dbus.service.method(
-        "org.freedesktop.Speech.Provider",
-        in_signature="",
-        out_signature="a(ssstas)",
-    )
-    def GetVoices(self):
+    @property
+    def Voices(self) -> List[Tuple[Str, Str, Str, UInt64, List[Str]]]:
         voices = []
         for v in self.mimic3.get_voices():
             # if v.location.startswith("/"):
@@ -194,18 +194,16 @@ class MimicProvider(dbus.service.Object):
                         )
         return voices
 
-    @dbus.service.signal("org.freedesktop.Speech.Provider")
-    def VoicesChanged(self):
-        pass
-
-
 def main():
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     mainloop = GLib.MainLoop()
 
-    session_bus = dbus.SessionBus()
-    name = dbus.service.BusName(f"ai.mimic3.Speech.Provider", session_bus)
-    obj = MimicProvider(mainloop, session_bus, f"/ai/mimic3/Speech/Provider")
+    bus = SessionMessageBus()
+    bus.publish_object(
+        "/ai/mimic3/Speech/Provider",
+        MimicProvider(mainloop),
+        server=GLibServerUnix,
+     )
+    bus.register_service("ai.mimic3.Speech.Provider")
 
     mainloop.run()
     return 0

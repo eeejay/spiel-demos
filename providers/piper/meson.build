@@ -10,7 +10,7 @@ project('speech-provider-piper',
 # Dependencies
 python_module = import('python')
 py = python_module.find_installation('python3', required: true, modules: [
-  'gi', 'piper', 'dbus'
+  'gi', 'piper', 'dasbus'
 ])
 
 # Configuration used in template files

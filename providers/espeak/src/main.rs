@@ -36,7 +36,8 @@ impl Speaker {
 
 #[dbus_interface(name = "org.freedesktop.Speech.Provider")]
 impl Speaker {
-    async fn get_voices(&self) -> Vec<(String, String, String, u64, Vec<String>)> {
+    #[dbus_interface(property)]
+    async fn voices(&self) -> Vec<(String, String, String, u64, Vec<String>)> {
         let features = VoiceFeature::EVENTS_WORD | VoiceFeature::EVENTS_SENTENCE;
         espeaker::list_voices()
             .into_iter()

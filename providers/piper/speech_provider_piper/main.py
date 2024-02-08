@@ -6,12 +6,13 @@ gi.require_version("Gst", "1.0")
 from gi.repository import Gst, GObject, GLib
 from piper import PiperVoice
 from pathlib import Path
-import dbus
+from dasbus.connection import SessionMessageBus
+from dasbus.unix import GLibServerUnix
+from dasbus.server.interface import dbus_interface
+from dasbus.typing import Variant, UnixFD, Str, Double, Bool, List, Tuple, UInt64
 import os
 import json
 import threading
-import dbus.service
-import dbus.mainloop.glib
 from time import time
 
 AUTO_EXIT_SECONDS = 120  # Two minute timeout for service
@@ -139,8 +140,9 @@ class PiperSynthWorker(GObject.Object):
         self.pipeline.set_state(Gst.State.PLAYING)
 
 
-class PiperProvider(dbus.service.Object):
-    def __init__(self, loop, default_voices_dir, *args):
+@dbus_interface("org.freedesktop.Speech.Provider")
+class PiperProvider(object):
+    def __init__(self, loop, default_voices_dir):
         self._last_speak_args = [0, "", "", 0, 0, 0]
         self._loop = loop
         if not os.environ.get("KEEP_ALIVE"):
@@ -153,7 +155,6 @@ class PiperProvider(dbus.service.Object):
             worker = PiperSynthWorker(self.voices_dir)
             worker.connect("done", self._on_done)
             self._worker_pool.append(worker)
-        dbus.service.Object.__init__(self, *args)
 
     def _timeout(self):
         if len(self._worker_pool) < 5:
@@ -164,26 +165,25 @@ class PiperProvider(dbus.service.Object):
     def _on_done(self, worker):
         self._worker_pool.append(worker)
 
-    @dbus.service.method(
-        "org.freedesktop.Speech.Provider",
-        in_signature="hssddb",
-        out_signature="",
-    )
-    def Synthesize(self, fd, utterance, voice_id, pitch, rate, is_ssml):
+    def Synthesize(
+        self,
+        fd: UnixFD,
+        utterance: Str,
+        voice_id: Str,
+        pitch: Double,
+        rate: Double,
+        is_ssml: Bool,
+    ):
         if len(self._worker_pool) > 0:
             worker = self._worker_pool.pop(0)
         else:
             worker = PiperSynthWorker(self.voices_dir)
             worker.connect("done", self._on_done)
 
-        worker.synthesize(fd.take(), utterance, voice_id, pitch, rate)
+        worker.synthesize(fd, utterance, voice_id, pitch, rate)
 
-    @dbus.service.method(
-        "org.freedesktop.Speech.Provider",
-        in_signature="",
-        out_signature="a(ssstas)",
-    )
-    def GetVoices(self):
+    @property
+    def Voices(self) -> List[Tuple[Str, Str, Str, UInt64, List[Str]]]:
         voices = []
         for voice_config in self.voices_dir.glob("*.onnx.json"):
             config = json.loads(voice_config.read_text())
@@ -203,20 +203,16 @@ class PiperProvider(dbus.service.Object):
             )
         return voices
 
-    @dbus.service.signal("org.freedesktop.Speech.Provider")
-    def VoicesChanged(self):
-        pass
-
 
 def main(default_voices_dir):
-    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
     mainloop = GLib.MainLoop()
-
-    session_bus = dbus.SessionBus()
-    name = dbus.service.BusName(f"ai.piper.Speech.Provider", session_bus)
-    obj = PiperProvider(
-        mainloop, default_voices_dir, session_bus, f"/ai/piper/Speech/Provider"
+    bus = SessionMessageBus()
+    bus.publish_object(
+        "/ai/piper/Speech/Provider",
+        PiperProvider(mainloop, default_voices_dir),
+        server=GLibServerUnix,
     )
+    bus.register_service("ai.piper.Speech.Provider")
 
     mainloop.run()
     return 0
