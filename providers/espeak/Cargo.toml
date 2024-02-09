@@ -11,7 +11,7 @@ zvariant = "3.6"
 zbus_names = "2.2.0"
 async-std = { version = "1.12.0", features =  ["attributes"] }
 espeakng-sys = { version = "0.2.0", features=["clang-runtime"] }
-espeaker = "0.1.4"
+espeaker = "0.1.5"
 rodio = "0.17.0"
 futures = "0.3.21"
 lazy_static = "1.4.0"

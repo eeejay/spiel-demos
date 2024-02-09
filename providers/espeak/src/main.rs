@@ -38,7 +38,17 @@ impl Speaker {
 impl Speaker {
     #[dbus_interface(property)]
     async fn voices(&self) -> Vec<(String, String, String, u64, Vec<String>)> {
-        let features = VoiceFeature::EVENTS_WORD | VoiceFeature::EVENTS_SENTENCE;
+        let features = VoiceFeature::EVENTS_WORD |
+            VoiceFeature::EVENTS_SENTENCE |
+            VoiceFeature::EVENTS_SSML_MARK |
+            VoiceFeature::SSML_SAY_AS_TELEPHONE |
+            VoiceFeature::SSML_SAY_AS_CHARACTERS |
+            VoiceFeature::SSML_SAY_AS_CHARACTERS_GLYPHS |
+            VoiceFeature::SSML_BREAK |
+            VoiceFeature::SSML_SUB |
+            VoiceFeature::SSML_EMPHASIS |
+            VoiceFeature::SSML_PROSODY |
+            VoiceFeature::SSML_SENTENCE_PARAGRAPH;
         espeaker::list_voices()
             .into_iter()
             .map(|v| {
@@ -76,6 +86,7 @@ impl Speaker {
             espeaker.set_voice(&voice);
             espeaker.params.pitch = Some((pitch * 50.0).round() as i32);
             espeaker.params.rate = Some((rate * NORMAL_RATE).round() as i32);
+            espeaker.params.is_ssml = is_ssml;
 
             let raw_fd = fd.into_raw_fd();
             // let mut f = File::from(owned_fd);

@@ -617,9 +617,9 @@ dependencies = [
 
 [[package]]
 name = "espeaker"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "080bb3115bebcaf4b7e12c5624c8669b03cc09f8d7b05e520dbd1c0c1acd028f"
+checksum = "200da980dfc582e5c1d94658922c9259b426bd53d104310708e4e83b0b7b0960"
 dependencies = [
  "espeakng-sys",
  "lazy_static",
