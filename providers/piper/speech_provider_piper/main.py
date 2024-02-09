@@ -170,7 +170,12 @@ class PiperProvider(dbus.service.Object):
         out_signature="",
     )
     def Synthesize(self, fd, utterance, voice_id, pitch, rate, is_ssml):
-        worker = self._worker_pool.pop(0)
+        if len(self._worker_pool) > 0:
+            worker = self._worker_pool.pop(0)
+        else:
+            worker = PiperSynthWorker(self.voices_dir)
+            worker.connect("done", self._on_done)
+
         worker.synthesize(fd.take(), utterance, voice_id, pitch, rate)
 
     @dbus.service.method(
