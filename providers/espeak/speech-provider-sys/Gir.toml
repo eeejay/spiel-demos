@@ -1,13 +1,13 @@
 # Using https://github.com/gtk-rs/gir/tree/33cf4d29
 
 [options]
-library = "SpielProvider"
+library = "SpeechProvider"
 version = "0.1"
 min_cfg_version = "0.1"
 target_path = "."
 girs_directories = [
     "/usr/share/gir-1.0/",
-    "../../../../spiel/build/libspielprovider",
+    "../../../../spiel/build/libspeechprovider",
 ]
 work_mode = "sys"
 single_version_file = true

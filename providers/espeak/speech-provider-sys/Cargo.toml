@@ -1,11 +1,11 @@
 [package]
-name = "spiel-provider-sys"
+name = "speech-provider-sys"
 version = "0.0.1"
 edition = "2021"
 build = "build.rs"
 
-[package.metadata.system-deps.spiel_provider]
-name = "spiel-provider-0.1"
+[package.metadata.system-deps.speech_provider]
+name = "speech-provider-0.1"
 version = "0.1"
 
 [package.metadata.docs.rs]
@@ -14,7 +14,7 @@ rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
 all-features = true
 
 [lib]
-name = "spiel_provider_sys"
+name = "speech_provider_sys"
 
 [dependencies]
 libc = "0.2"

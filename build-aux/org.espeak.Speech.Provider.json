@@ -44,7 +44,7 @@
       ]
     },
     {
-      "name": "libspielprovider",
+      "name": "libspeechprovider",
       "buildsystem": "meson",
       "config-opts": [
         "-Dtests=false",

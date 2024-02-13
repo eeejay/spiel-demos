@@ -20,8 +20,8 @@ bitflags = "2.2"
 glib = { version = "0.18.5" }
 
 [dependencies.ffi]
-package = "spiel-provider-sys"
-path = "./spiel-provider-sys"
+package = "speech-provider-sys"
+path = "./speech-provider-sys"
 
 [dependencies.gobject]
 package = "gobject-sys"

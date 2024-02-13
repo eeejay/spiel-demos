@@ -1729,14 +1729,14 @@ dependencies = [
  "lazy_static",
  "libc",
  "rodio",
- "spiel-provider-sys",
+ "speech-provider-sys",
  "zbus",
  "zbus_names",
  "zvariant",
 ]
 
 [[package]]
-name = "spiel-provider-sys"
+name = "speech-provider-sys"
 version = "0.0.1"
 dependencies = [
  "glib-sys 0.19.0",
