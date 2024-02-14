@@ -183,6 +183,10 @@ class PiperProvider(object):
         worker.synthesize(fd, utterance, voice_id, pitch, rate)
 
     @property
+    def Name(self) -> Str:
+        return "Piper"
+
+    @property
     def Voices(self) -> List[Tuple[Str, Str, Str, UInt64, List[Str]]]:
         voices = []
         for voice_config in self.voices_dir.glob("*.onnx.json"):

@@ -164,6 +164,10 @@ class MimicProvider(object):
         worker.synthesize(fd, utterance, voice_id, pitch, rate)
 
     @property
+    def Name(self) -> Str:
+        return "Mimic 3"
+
+    @property
     def Voices(self) -> List[Tuple[Str, Str, Str, UInt64, List[Str]]]:
         voices = []
         for v in self.mimic3.get_voices():

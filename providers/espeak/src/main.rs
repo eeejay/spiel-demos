@@ -37,6 +37,11 @@ impl Speaker {
 #[dbus_interface(name = "org.freedesktop.Speech.Provider")]
 impl Speaker {
     #[dbus_interface(property)]
+    async fn name(&self) -> String {
+        "eSpeak NG".to_string()
+    }
+
+    #[dbus_interface(property)]
     async fn voices(&self) -> Vec<(String, String, String, u64, Vec<String>)> {
         let features = VoiceFeature::EVENTS_WORD |
             VoiceFeature::EVENTS_SENTENCE |
