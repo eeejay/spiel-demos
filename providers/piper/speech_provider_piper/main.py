@@ -173,6 +173,7 @@ class PiperProvider(object):
         pitch: Double,
         rate: Double,
         is_ssml: Bool,
+        language: Str,
     ):
         if len(self._worker_pool) > 0:
             worker = self._worker_pool.pop(0)

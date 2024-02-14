@@ -76,6 +76,7 @@ impl Speaker {
         pitch: f32,
         rate: f32,
         is_ssml: bool,
+        _language: &str,
         #[zbus(header)] _header: MessageHeader<'_>,
         #[zbus(signal_context)] _ctxt: SignalContext<'_>,
     ) {

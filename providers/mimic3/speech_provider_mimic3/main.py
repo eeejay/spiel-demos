@@ -159,6 +159,7 @@ class MimicProvider(object):
         pitch: Double,
         rate: Double,
         is_ssml: Bool,
+        language: Str,
     ):
         worker = self._worker_pool.pop(0)
         worker.synthesize(fd, utterance, voice_id, pitch, rate)
