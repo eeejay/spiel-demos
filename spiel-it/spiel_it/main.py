@@ -98,19 +98,12 @@ class SpielItApp(Adw.Application):
         box.append(provider_label)
         list_item.set_child(box)
 
-    def _get_provider_human_readable_name(self, well_known_name):
-        for provider in self.speaker.get_providers():
-            if provider.get_well_known_name() == well_known_name:
-                return provider.props.name or ""
-        return ""
-
     def _on_list_factory_bind(self, factory, list_item):
         name_label = list_item.get_child().get_first_child()
         provider_label = list_item.get_child().get_last_child()
         voice = list_item.get_item()
         name_label.set_text(voice.props.name)
-        well_known_name = voice.props.provider_well_known_name
-        provider_label.set_text(self._get_provider_human_readable_name(well_known_name))
+        provider_label.set_text(voice.props.provider.props.name)
 
     def _on_playpause_clicked(self, button):
         if not self.speaker.props.speaking:
