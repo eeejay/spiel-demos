@@ -5,8 +5,8 @@ edition = "2021"
 build = "build.rs"
 
 [package.metadata.system-deps.speech_provider]
-name = "speech-provider-0.1"
-version = "0.1"
+name = "speech-provider-1.0"
+version = "1.0.0"
 
 [package.metadata.docs.rs]
 rustc-args = ["--cfg", "docsrs"]

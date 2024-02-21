@@ -4,7 +4,7 @@ import pathlib
 from time import time
 
 gi.require_version("Gtk", "4.0")
-gi.require_version("Spiel", "0.1")
+gi.require_version("Spiel", "1.0")
 gi.require_version("Adw", "1")
 gi.require_version("Pango", "1.0")
 from gi.repository import Spiel, Gtk, Adw, Gdk, Pango
@@ -75,6 +75,8 @@ class SpielItApp(Adw.Application):
         self.speaker.connect("notify::paused", self._on_speaker_update)
         self.speaker.connect("utterance-started", self._on_utterance_started)
         self.speaker.connect("range-started", self._on_range_started_cb)
+        self.speaker.connect("word-started", self._on_range_started_cb)
+        self.speaker.connect("sentence-started", self._on_range_started_cb)
 
         self.voices_select.set_model(self.speaker.props.voices)
 

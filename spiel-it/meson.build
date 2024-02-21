@@ -13,7 +13,7 @@ py = python_module.find_installation('python3', required: true, modules: [
   'gi',
 ])
 
-dependency('spiel-0.1')
+dependency('spiel-1.0')
 
 application_id = 'org.monotonous.spiel-it'
 app_data_dir = get_option('prefix') / get_option('datadir') / 'spiel-it'

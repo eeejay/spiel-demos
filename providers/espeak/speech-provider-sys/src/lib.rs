@@ -145,7 +145,7 @@ impl ::std::fmt::Debug for SpeechProviderStreamWriter {
     }
 }
 
-#[link(name = "speech-provider-0.1")]
+#[link(name = "speech-provider-1.0")]
 extern "C" {
 
     //=========================================================================
