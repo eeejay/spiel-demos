@@ -1,0 +1,9 @@
+[Flatpak Ref]
+Version=1
+Title=eSpeak Speech Provider
+Description=Speech provider for eSpeak speech engine
+Homepage=https://eeejay.github.io/spiel-demos
+Name=org.espeak.Speech.Provider
+Url=https://eeejay.github.io/spiel-demos/repo
+RuntimeRepo=https://flathub.org/repo/flathub.flatpakrepo
+GPGKey=mDMEZZWaSxYJKwYBBAHaRw8BAQdACV6w6+Bbovz6Vpyx1rQ8ZCnfUnWSLUWb5EoLAmKPyFW0EGVlZWpheUBnaXRodWIuaW+ImQQTFgoAQRYhBBmmkocqhfIfyHWwkX7vHImPyEmfBQJllZpLAhsDBQkFo5qABQsJCAcCAiICBhUKCQgLAgQWAgMBAh4HAheAAAoJEH7vHImPyEmfPqAA/jY9uHOKRD9/ByFsly+d4r4PGRiEuygZpsdTCkE/P9mVAP4w10NaV/SM4YEKpNLNjlLxahq+1gw1HjjzRLHaUL8aCrg4BGWVmksSCisGAQQBl1UBBQEBB0DUvpNB4l+YNk45u1UnaWcgCl8NnHCbB+AG3gsTedcDegMBCAeIeAQYFgoAIBYhBBmmkocqhfIfyHWwkX7vHImPyEmfBQJllZpLAhsMAAoJEH7vHImPyEmf1PYBANgR1d/R6jqgQg7TuP3Ic3hTZHkMsVecWDhGI10tahiDAQCjGk2tex7nBvhiwEiagD5o+aqBfoR6Ezb4rKkarf8hBA==
